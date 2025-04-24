@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2E709E;
+  --color-secondary: #E6A43B;
+  --font-primary: sans-serif, ui-sans-serif, system-ui;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  z-index: 10;
+  overflow-x: hidden;
+
+}
+
+/* 
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+.navbar-menu a {
+  transition: background-color 0.3s;
+}
+
+.card-single, .aside-card {
+  transition: transform 0.3s;
+}
+
+.card-single:hover, .aside-card:hover {
+  transform: translateY(-5px);
+}
+
+.bookings table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.bookings th,
+.bookings td {
+  transition: background-color 0.3s;
+}
+
+.bookings tr:hover {
+  transition: background-color 0.3s;
+}
+
+.edit-btn, .delete-btn {
+  transition: background-color 0.3s;
+}
