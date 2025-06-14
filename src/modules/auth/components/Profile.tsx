@@ -10,8 +10,9 @@ const ProfilePage = () => {
         email: userProfile?.email,
         phone: userProfile?.phone,
         address: userProfile?.address,
+        id: userProfile?.id,
         password: "123",
-        profilePic: null
+        profilePic: userProfile?.image
     });
 
     const [editMode, setEditMode] = useState(false);
@@ -37,7 +38,7 @@ const ProfilePage = () => {
                         <div className="flex flex-col items-center">
                             <div className="relative group">
                                 <img
-                                    src={user.profilePic}
+                                    src={user?.profilePic[0]}
                                     alt="Profile"
                                     className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
                                 />

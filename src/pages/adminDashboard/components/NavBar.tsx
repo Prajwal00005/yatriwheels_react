@@ -8,6 +8,12 @@ const NavBar = () => {
   const [isHidden, setHidden] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); // Reference to the dropdown container
 
+  const handleSignOut = () => {
+    // Clear localStorage or call logout function from context
+    localStorage.removeItem('token');
+    window.location.href = '/'; // or use navigate('/login')
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -38,7 +44,7 @@ const NavBar = () => {
           <span className="sr-only">Open user menu</span>
           <img
             className="w-8 h-8 me-2 rounded-full"
-            src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+            src={user?.avatar ? `http://localhost:3000/${user.avatar}` : "/avatar.jpg"}
             alt="user photo"
           />
           {user?.name}
@@ -95,6 +101,7 @@ const NavBar = () => {
               <a
                 href="#"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                onClick={handleSignOut}
               >
                 Sign out
               </a>

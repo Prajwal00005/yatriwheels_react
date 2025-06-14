@@ -18,7 +18,6 @@ const registerUserData = async ({ data }: { data: z.infer<typeof userSchema> }):
         formData.set("image", data.image[0]);
     }
 
-    console.log(formData);
     try {
         const response = await axios.post("http://localhost:3000/api/v1/auth/register", formData, {
             headers: {

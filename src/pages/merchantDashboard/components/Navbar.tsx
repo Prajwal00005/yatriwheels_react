@@ -5,17 +5,23 @@ import { useUser } from '../../../context/login_context';
 const Navbar: React.FC = () => {
     const user = useUser();
 
+    console.log(user)
 
+    const handleSignOut = () => {
+        // Clear localStorage or call logout function from context
+        localStorage.removeItem('token');
+        window.location.href = '/'; // or use navigate('/login')
+    };
     return (
         <nav
-            className="bg-gray-800 text-white w-16 md:w-64 h-screen fixed top-0 left-0 flex flex-col transition-all duration-300"
+            className="shadow-lg text-white w-16 md:w-64 h-screen fixed top-0 left-0 flex flex-col transition-all duration-300"
             role="navigation"
         >
             <div className="p-4 flex items-center gap-3">
                 {user ? (
                     <img
                         className="w-8 h-8 rounded-full object-cover"
-                        src={user.avatar || "/avatar.jpg"}
+                        src={user.avatar ? `http://localhost:3000/${user.avatar}` : "avatar.jpg"}
                         alt="user avatar"
                     />
                 ) : (
@@ -26,18 +32,18 @@ const Navbar: React.FC = () => {
                     />
                 )}
 
-                <div className="hidden md:block">
+                <div className="hidden md:block text-secondary">
                     <h3 className="text-lg font-semibold">{user?.name || 'Guest'}</h3>
-                    <span className="text-sm text-gray-400">{user?.email || 'Not logged in'}</span>
+                    <span className="text-sm ">{user?.email || 'Not logged in'}</span>
                 </div>
             </div>
             <div className="p-4 flex-1">
-                <ul className="space-y-2">
+                <ul className="space-y-2 text-primary text-xl font-bold">
                     <li>
                         <NavLink
                             to="/merchant/dashboard"
                             className={({ isActive }) =>
-                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-secondary' : ''}`
                             }
                         >
                             <i className="las la-tachometer-alt text-xl"></i>
@@ -48,7 +54,7 @@ const Navbar: React.FC = () => {
                         <NavLink
                             to="/merchant/create-vehicle"
                             className={({ isActive }) =>
-                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-secondary' : ''}`
                             }
                         >
                             <i className="las la-users text-xl"></i>
@@ -59,7 +65,7 @@ const Navbar: React.FC = () => {
                         <NavLink
                             to="/merchant/vehicle"
                             className={({ isActive }) =>
-                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-secondary' : ''}`
                             }
                         >
                             <i className="las la-car text-xl"></i>
@@ -70,7 +76,7 @@ const Navbar: React.FC = () => {
                         <NavLink
                             to="/merchant/booking"
                             className={({ isActive }) =>
-                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-secondary' : ''}`
                             }
                         >
                             <i className="las la-calendar text-xl"></i>
@@ -81,7 +87,7 @@ const Navbar: React.FC = () => {
                         <NavLink
                             to="/merchant/contact"
                             className={({ isActive }) =>
-                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
+                                `flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-secondary' : ''}`
                             }
                         >
                             <i className="las la-users text-xl"></i>
@@ -89,6 +95,7 @@ const Navbar: React.FC = () => {
                         </NavLink>
                     </li>
                 </ul>
+                <div className='p-2 bg-white shadow-lg mt-50 rounded-lg text-center text-black font-bold hover:scale-102' onClick={handleSignOut}>Log out</div>
             </div>
         </nav>
     );

@@ -16,3 +16,17 @@ const Companyschema = z.object({
 });
 
 export default Companyschema;
+
+
+const companySchema = z.object({
+  name: z.string().min(1, "name must required"),
+  email: z.string().email("please enter  a valid email"),
+  phone: z.string().min(9, "number must be at least 10 letter"),
+  password: z.string().min(6, "password must be greater than 6 letter"),
+  confirmPassword: z.string().min(6, "password must be greater than 6 letter"),
+  image: z.instanceof(FileList).optional()
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Password must matched",
+  path: ["confirmPassword"]
+
+})

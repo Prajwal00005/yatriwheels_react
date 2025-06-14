@@ -8,9 +8,6 @@ const HomePage = () => {
       <UserPage />
       <Banner />
       <Layout />
-
-      
-    
     </div>
   )
 }

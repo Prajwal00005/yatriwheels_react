@@ -11,6 +11,9 @@ import SingleCard from './pages/Homepage/components/SingleCard'
 import ProfilePage from './modules/auth/components/Profile'
 import MerchantRoute from './pages/merchantDashboard/merchantRoute'
 import BookingDashboard from './pages/Homepage/components/bookingDasboard'
+import Test from './Test'
+import { Provider } from "react-redux"
+import store from './store'
 // import VehiclesCard from './pages/Homepage/components/VehicleCard'
 // import SideNavBar from './pages/adminDashboard/components/SideNavBar'
 
@@ -32,12 +35,19 @@ function App() {
           <Route path='/admin/*' element={<Routespage />} />
 
           <Route path='/merchant/*' element={< MerchantRoute />} />
+
         </Route>
 
       </Routes>
 
 
+      <Provider store={store} >
+        <Routes>
 
+          <Route path='/test' element={< Test />} />
+
+        </Routes>
+      </Provider>
 
 
     </>

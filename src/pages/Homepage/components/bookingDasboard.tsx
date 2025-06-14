@@ -138,13 +138,23 @@ const BookingDashboard: React.FC = () => {
                 throw new Error("Unknown booking id");
             }
 
+            const amountInPaisa = booking.totalPrice * 100; // ← Define it here
+
             const config = generateKhaltiConfig({
                 identity: booking._id,
                 productName: booking.vehicle.name,
+                amount: amountInPaisa,
+                onServerSuccess: () => {
+                    toast.success("Payment confirmed successfully!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                    });
+                    // Optional: refresh bookings, navigate, etc.
+                },
             });
 
             const checkout = new window.KhaltiCheckout(config);
-            checkout.show({ amount: booking.totalPrice * 100 }); // Khalti uses paisa
+            checkout.show({ amount: amountInPaisa }); // Use the same value here too
 
         } catch (error: any) {
             toast.error(error.message || 'Failed to initiate payment', {
@@ -209,7 +219,7 @@ const BookingDashboard: React.FC = () => {
                                     {bookings.map((booking) => (
                                         <tr key={booking._id}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                {booking.vehicle.name}
+                                                {booking.vehicle?.name}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 {new Date(booking.startDate).toLocaleDateString()}

@@ -1,10 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useUser } from "./login_context";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import { loadKhaltiScript } from "../utils/loadKhalti";
 
 export default function ProtectedRouteLayout() {
+
+    const nav = useNavigate();
 
     useEffect(() => {
         loadKhaltiScript();
@@ -14,11 +16,17 @@ export default function ProtectedRouteLayout() {
 
 
     if (user === undefined) {
-        return <>checking token plese wait</>;
+        return <>checking token please wait</>;
     }
 
     if (user === null) {
-        return <>failed to check token</>
+        setTimeout(() => {
+            return <>failed to check token
+            </>
+        }, 1000);
+
+        nav("/")
+
     }
 
 
