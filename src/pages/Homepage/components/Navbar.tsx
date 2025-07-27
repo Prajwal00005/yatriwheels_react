@@ -44,6 +44,13 @@ const Navbar: React.FC = () => {
 
                 {/* Right Side */}
                 <div className="flex items-center space-x-4">
+                    <Link
+                        to={`/booking`}
+                        onClick={() => setDropdownOpen(false)}
+                        className="block px-4 py-2 hover:bg-white hover:text-blue-500 bg-blue-600 text-white  transition-colors duration-200 mx-8 rounded-lg shadow-lg"
+                    >
+                        <i className="las la-user mr-2"></i> Booking Dashboard
+                    </Link>
                     {user ? (
                         <div className="relative">
                             <button
@@ -69,6 +76,7 @@ const Navbar: React.FC = () => {
                                         <div className="text-sm text-gray-500 truncate">{user.email}</div>
                                     </div>
                                     <ul className="py-2 text-sm text-gray-700">
+
                                         <li>
                                             <Link
                                                 to={`/profile/${user.id || 1}`}
